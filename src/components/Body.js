@@ -1,17 +1,26 @@
 import RestaurantCard from "./RestaurantCard";
-import cardsList from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Body =() =>{
-    const [listOfRestaurants, setListOfRestaurants] = useState(cardsList);
+    const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
     const filterBtnHandler = () =>{
-        const filteredList = cardsList.filter((res)=>res.card.card.info.avgRating > 4.6)
+        const filteredList = listOfRestaurants.filter((res)=>res?.card?.card?.info?.avgRating > 4.6);
         setListOfRestaurants(filteredList);
     }
 
     const clearBtnHandler = () =>{
-        setListOfRestaurants(cardsList);
+        fetchData();
+    }
+
+    useEffect(()=>{
+        fetchData();
+    }, [])
+
+    const fetchData = async () =>{
+        const data = await fetch("https://mocki.io/v1/f0241638-27f4-454a-ba4d-0a8efea2de55")
+        const json = await data.json();
+        setListOfRestaurants(json.data);
     }
 
     return (
@@ -21,9 +30,9 @@ const Body =() =>{
                 <button onClick={clearBtnHandler} style={{cursor: "pointer"}}>Clear Filter</button>
             </div>
             <div className="res-container">
-                {
-                    listOfRestaurants.map((restaurant)=> <RestaurantCard resData={restaurant} key={restaurant.card.card.info.id}/>)
-                }
+            {
+                listOfRestaurants.map((restaurant)=> <RestaurantCard resData={restaurant} key={restaurant.card.card.info.id}/>)
+            }
             </div>
         </div>
     )
