@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 
@@ -23,7 +24,7 @@ const Body =() =>{
     const fetchData = async () =>{
         const data = await fetch("https://mocki.io/v1/f0241638-27f4-454a-ba4d-0a8efea2de55")
         const json = await data.json();
-        console.log(json);
+        console.log(json.data);
         setListOfRestaurants(json.data);
         setfilteredRestaurants(json.data);
     }
@@ -43,7 +44,9 @@ const Body =() =>{
             </div>
             <div className="res-container">
             {
-                filteredRestaurants.map((restaurant)=> <RestaurantCard resData={restaurant} key={restaurant.card.card.info.id}/>)
+                filteredRestaurants.map((restaurant)=> 
+                    <Link key={restaurant.card.card.info.id} to={"/restaurant/"+restaurant.card.card.info.id}><RestaurantCard resData={restaurant} /></Link>
+                )
             }
             </div>
         </div>
