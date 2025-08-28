@@ -24,7 +24,7 @@ const Body =() =>{
     const fetchData = async () =>{
         const data = await fetch("https://mocki.io/v1/f0241638-27f4-454a-ba4d-0a8efea2de55")
         const json = await data.json();
-        console.log(json.data);
+        //console.log(json.data);
         setListOfRestaurants(json.data);
         setfilteredRestaurants(json.data);
     }
