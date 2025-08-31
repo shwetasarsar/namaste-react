@@ -35,17 +35,18 @@ const Body =() =>{
     }
 
     return (
-        <div className="body-container">
-            <div className="btn-container">
-                <input type="text" onChange={(e)=>{setSearchText(e.target.value)}} value={searchText}/>
-                <button onClick={searchHandler}>Search</button>
-                <button onClick={filterBtnHandler} style={{cursor: "pointer"}}>Top rated restaurant</button>
-                <button onClick={clearBtnHandler} style={{cursor: "pointer"}}>Clear</button>
+        <div className="body">
+            <div className="p-4 m-4">
+                <input type="text" onChange={(e)=>{setSearchText(e.target.value)}} value={searchText} className="border border-solid border-black"/>
+                <button onClick={searchHandler} className="cursor-pointer bg-green-100 px-4 py-2 m-4 rounded-lg">Search</button>
+                <button onClick={filterBtnHandler} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-orange-300">Top rated restaurant</button>
+                <button onClick={clearBtnHandler} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-gray-100">Clear</button>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap m-4">
             {
                 filteredRestaurants.map((restaurant)=> 
-                    <Link key={restaurant.card.card.info.id} to={"/restaurant/"+restaurant.card.card.info.id}><RestaurantCard resData={restaurant} /></Link>
+                    <Link key={restaurant.card.card.info.id} to={"/restaurant/"+restaurant.card.card.info.id} 
+                className="bg-gray-100 rounded-lg m-4 p-4 hover:bg-gray-300"><RestaurantCard resData={restaurant} /></Link>
                 )
             }
             </div>
