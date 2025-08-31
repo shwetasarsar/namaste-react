@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import { useState, useEffect } from "react";
 
 const Body =() =>{
@@ -22,7 +22,7 @@ const Body =() =>{
     }
 
     const fetchData = async () =>{
-        const data = await fetch("https://mocki.io/v1/f0241638-27f4-454a-ba4d-0a8efea2de55")
+        const data = await fetch("https://mocki.io/v1/ca089d73-d777-456a-a62d-54ba2b9dbd6b")
         const json = await data.json();
         //console.log(json.data);
         setListOfRestaurants(json.data);
@@ -33,6 +33,8 @@ const Body =() =>{
         const filteredRes = listOfRestaurants.filter((res) => res?.card?.card?.info?.name.toLowerCase().includes(searchText.toLowerCase()))
         setfilteredRestaurants(filteredRes);
     }
+
+    const PromotedRestaurant = withPromotedLabel(RestaurantCard);
 
     return (
         <div className="body">
@@ -46,7 +48,13 @@ const Body =() =>{
             {
                 filteredRestaurants.map((restaurant)=> 
                     <Link key={restaurant.card.card.info.id} to={"/restaurant/"+restaurant.card.card.info.id} 
-                className="bg-gray-100 rounded-lg m-4 p-4 hover:bg-gray-300"><RestaurantCard resData={restaurant} /></Link>
+                className="bg-gray-100 rounded-lg m-4 p-4 hover:bg-gray-300">
+                    {
+                        restaurant.card.card.info.promoted ?
+                        <PromotedRestaurant resData={restaurant} /> : 
+                        <RestaurantCard resData={restaurant} />
+                    }
+                    </Link>
                 )
             }
             </div>
