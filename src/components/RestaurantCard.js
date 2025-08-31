@@ -15,12 +15,12 @@ const RestaurantCard =(props)=>{
     )
 }
 
-export const withPromotedLabel =(RestaurantCard)=>{
+export const withPromotedLabel =(WrappedComponent)=>{
     return (props)=>{
         return (
             <div>
                 <label className="absolute p-2 m4 bg-black text-white">Promoted</label>
-                <RestaurantCard {...props}/>
+                <WrappedComponent {...props}/>
             </div>
         );
     };
