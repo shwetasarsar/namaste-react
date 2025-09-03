@@ -75,4 +75,4 @@ const TicTacTo = () => {
     )
 }
 
-export default TicTacTo
+export default TicTacTo;

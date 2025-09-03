@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const Body =() =>{
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -36,6 +37,8 @@ const Body =() =>{
 
     const PromotedRestaurant = withPromotedLabel(RestaurantCard);
 
+    const { loggedInUser, setUserName } = useContext(UserContext);
+
     return (
         <div className="body">
             <div className="p-4 m-4">
@@ -43,6 +46,8 @@ const Body =() =>{
                 <button onClick={searchHandler} className="cursor-pointer bg-green-100 px-4 py-2 m-4 rounded-lg">Search</button>
                 <button onClick={filterBtnHandler} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-orange-300">Top rated restaurant</button>
                 <button onClick={clearBtnHandler} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-gray-100">Clear</button>
+                <button onClick={()=> setUserName("shweta")} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-gray-100">Set Name</button>
+                {/* <input type="text" value={loggedInUser} onChange={(e)=> setUserName(e.target.value)} className="border-1 rounded-lg p-2"/> */}
             </div>
             <div className="flex flex-wrap m-4">
             {
