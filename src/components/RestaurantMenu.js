@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CDN_URL } from '../utils/constants';
+import ItemList from './ItemList';
 
 const RestaurantMenu = () => {
   const { restId } = useParams();
@@ -22,25 +22,14 @@ const RestaurantMenu = () => {
     setItemList(json.card.card.categories[0].itemCards);
   }
 
+  
   return (
     <div className='text-center w-6/12 mx-auto'>
       <div className='font-bold text-2xl'>{resName}</div>
       <div>
         {
-          itemList.map((menu,index)=>(
-            <div key={index} className='m-2 p-2 bg-gray-100 text-left flex justify-between'>
-              <div className='w-9/12'>
-                <div className='font-bold'>{menu.card.info.name}</div>
-                <div>Rs. {menu.card.info.price / 100}</div>
-                <p className='text-xs '>{menu.card.info.description}</p>
-              </div>
-              <div className='w-3/12'>
-                <div className='absolute'>
-                  <button className='bg-black text-white px-2 py-1 mx-8 mt-15 rounded-lg cursor-pointer'>Add +</button>
-                </div>
-                <img src={CDN_URL+menu.card.info.imageId} className='w-full'/>
-              </div>
-            </div>
+          itemList.map((item,index)=>(
+            <ItemList key={index} item={item} isAdd={true} itemIndex={index}/>
           ))
         }
       </div>
