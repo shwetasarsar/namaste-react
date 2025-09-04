@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 import Header from "../Header";
 import { Provider } from "react-redux";
 import appStore from "../../utils/appStore";
@@ -14,7 +14,53 @@ it("should load header component with login button", ()=>{
         </BrowserRouter>
     )
 
-    const button = screen.getByRole("button");
+    const loginButton = screen.getByRole("button", {name: "Login"});
 
-    expect(button).toBeInTheDocument();
+    expect(loginButton).toBeInTheDocument();
+})
+
+it("should show cart with zero items in the Header component", ()=>{
+    render(
+        <BrowserRouter>
+        <Provider store={appStore}>
+            <Header />
+        </Provider>
+        </BrowserRouter>
+    )
+
+    const cartItems = screen.getByText("Cart - (0 items)");
+
+    expect(cartItems).toBeInTheDocument();
+})
+
+it("should render Header component with cart item", ()=>{
+    render(
+        <BrowserRouter>
+        <Provider store={appStore}>
+            <Header />
+        </Provider>
+        </BrowserRouter>
+    )
+
+    const cartItems = screen.getByText(/Cart/);
+
+    expect(cartItems).toBeInTheDocument();
+})
+
+it("should change Login button to Logout on click", ()=>{
+    render(
+        <BrowserRouter>
+        <Provider store={appStore}>
+            <Header />
+        </Provider>
+        </BrowserRouter>
+    )
+
+    const loginButton = screen.getByRole("button", {name: 'Login'});
+
+    fireEvent.click(loginButton);
+
+    const logoutButton = screen.getByRole("button", {name: 'Logout'});
+
+    expect(logoutButton).toBeInTheDocument();
 })
