@@ -18,7 +18,7 @@ const ItemList = ({item, isAdd, itemIndex}) => {
 
     return (
     <div>
-        <div className='m-2 p-2 bg-gray-100 text-left flex justify-between'>
+        <div data-testid="foodItems" className='m-2 p-2 bg-gray-100 text-left flex justify-between'>
             <div className='w-9/12'>
             <div className='font-bold'>{item.card.info.name}</div>
             <div>Rs. {item.card.info.price / 100}</div>

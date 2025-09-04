@@ -42,7 +42,7 @@ const Body =() =>{
     return (
         <div className="body">
             <div className="p-4 m-4">
-                <input type="text" onChange={(e)=>{setSearchText(e.target.value)}} value={searchText} className="border border-solid border-black"/>
+                <input data-testid="searchInput" type="text" onChange={(e)=>{setSearchText(e.target.value)}} value={searchText} className="border border-solid border-black"/>
                 <button onClick={searchHandler} className="cursor-pointer bg-green-100 px-4 py-2 m-4 rounded-lg">Search</button>
                 <button onClick={filterBtnHandler} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-orange-300">Top rated restaurant</button>
                 <button onClick={clearBtnHandler} className="cursor-pointer mx-4 px-4 py-2 rounded-lg bg-gray-100">Clear</button>

@@ -64,3 +64,36 @@ it("should change Login button to Logout on click", ()=>{
 
     expect(logoutButton).toBeInTheDocument();
 })
+
+it("should change Logout button to Login on click", ()=>{
+    render(
+        <BrowserRouter>
+        <Provider store={appStore}>
+            <Header />
+        </Provider>
+        </BrowserRouter>
+    )
+    const loginButton = screen.getByRole("button", {name: 'Login'});
+
+    fireEvent.click(loginButton);
+
+    const logoutButton = screen.getByRole("button", {name: 'Logout'});
+
+    fireEvent.click(logoutButton);
+
+    expect(loginButton).toBeInTheDocument();
+})
+
+it("should get Online status on Header Component", ()=>{
+    render(
+        <BrowserRouter>
+        <Provider store={appStore}>
+            <Header />
+        </Provider>
+        </BrowserRouter>
+    )
+
+    const getStatus = screen.getByText(/Online status:/);
+
+    expect(getStatus).toBeInTheDocument();
+})
